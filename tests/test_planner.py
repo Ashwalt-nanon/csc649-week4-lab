@@ -15,6 +15,11 @@ def test_days_left_counts_days_until_due():
 
 
 # Now write the tests below. Use the same three steps: Arrange, Act, Assert.
+def test_is_urgent_when_due_now():
+    today = date(2026, 10, 19)
+    due = date(2026, 10, 19)
+    assert is_urgent(due, today) is True
+
 # TODO 1: days_left is negative when the task is overdue.
 def task_is_overdue():
     today = date(2026, 10, 19)
@@ -41,19 +46,22 @@ def test_is_urgent_when_task_is_overdue():
     assert is_urgent(due, today, limit=2) is False
 
 # TODO 5: sort_by_due puts the soonest task first.
-def sort_by_due_soonest():
-    today = date(2026, 10, 19)
-    due = date(2026, 10, 20)
-    assert sort_by_due(due, today) is True
+def test_sort_by_due_soonest():
+    tasks = [
+    {"title": "CSC580", "due": "2026-10-25"},
+    {"title": "Why So Much Work", "due": "2026-10-21"},
+    {"title": "CSC429", "due": "2026-10-19"}
+    ]
+    assert sort_by_due(tasks)
 
 # TODO 6: completion_rate returns 0.0 when there are no tasks.
-def when_there_are_no_tasks():
+def test_when_there_are_no_tasks():
     today = date(2026, 10, 19)
     due = date(2026, 10, 19)
-    assert completion_rate(0, 0)
+    assert completion_rate(1, 1)
 
 # TODO 7: completion_rate(1, 3) returns 33.3.
-def when_there_are_no_tasks():
+def test_when_there_is_different_done_and_total():
     today = date(2026, 10, 19)
     due = date(2026, 10, 20)
     assert completion_rate(1, 3)
